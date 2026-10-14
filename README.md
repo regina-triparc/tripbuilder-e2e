@@ -10,6 +10,7 @@ This repo has two kinds of tests:
 |---|---|---|
 | `e2e/ui`, `e2e/api`, `e2e/pdp`, `e2e/services`, `e2e/traveler` | people | `ui`, `api`, `pdp`, `services-hotel`, `traveler`, ... |
 | `e2e/qa/<TICKET>.spec.ts` | the [TB-TAF](https://github.com/regina-triparc/TB-TAF) QA agent, one file per Jira ticket | `qa-agent` |
+| `xray/<TICKET>/` | the same agent: the ticket's Xray test cases (JSON, CSV, readable plan), exported to Jira after review | - |
 
 It started as `apps/search-e2e` in a local TripArc.TripBuilder checkout and moved
 here so the suite and the generated tests are versioned and shared.
@@ -59,6 +60,9 @@ Run a generated spec yourself:
 ```bash
 npx playwright test e2e/qa/TB-601.spec.ts --project=qa-agent --reporter=list
 ```
+
+The Xray test cases follow the same review: they are committed with the spec, and
+exported to Jira only after merge. See [xray/README.md](xray/README.md).
 
 Generated specs are a starting point, not a verdict. Read them before merging.
 A test that fails because it guessed a selector is a fix for the spec. A test

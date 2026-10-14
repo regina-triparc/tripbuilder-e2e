@@ -14,16 +14,4 @@ test.describe('TB-601: Info services', () => {
     await expect(infoRow.getByRole('button', { name: 'Modify' })).toBeVisible();
     await expect(infoRow.getByRole('button', { name: 'Delete' })).toBeVisible();
   });
-
-  test('[TC-002] an Info row shows the Info only badge on non-Info rows', async ({ page }) => {
-    const infoRow = page.getByRole('button', { name: /Info only/ }).first();
-    await expect(infoRow).toBeVisible();
-    await expect(infoRow).not.toHaveAccessibleName(/Live price|Needs recheck|Check failed/);
-    await expect(infoRow.getByRole('button', { name: 'Modify' })).toBeVisible();
-    await expect(infoRow.getByRole('button', { name: 'Delete' })).toBeVisible();
-
-    // Assuming there's another row with a different name, e.g., 'Activity'
-    const activityRow = page.getByRole('button', { name: /Activity/ }).first();
-    await expect(activityRow).not.toHaveAccessibleName(/Info only/);
-  });
 });

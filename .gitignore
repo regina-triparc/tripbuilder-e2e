@@ -1,0 +1,16 @@
+node_modules/
+test-results/
+test-artifacts/
+e2e/.auth/
+e2e/.auth-state.json
+e2e/api/fixtures/live-inventory-dataset.csv
+e2e/api/fixtures/pim-search-negative-dataset.csv
+*.har
+.env
+!.env.example
+
+# Local-only files
+.claude/settings.local.json
+dom-snapshot*.txt
+*.bak*
+playwright-report/

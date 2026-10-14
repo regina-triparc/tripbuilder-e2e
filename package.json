@@ -1,0 +1,33 @@
+{
+  "name": "tripbuilder-e2e",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "e2e:auth": "playwright test --project=setup --headed",
+    "e2e:auth-manual": "playwright test --project=setup-manual --workers=1",
+    "e2e": "playwright test --project=ui --project=api --project=traveler",
+    "e2e:ui-project": "playwright test --project=ui",
+    "e2e:api-project": "playwright test --project=api",
+    "e2e:traveler": "playwright test --project=traveler",
+    "e2e:pdp": "playwright test --project=pdp",
+    "e2e:pdp-headed": "playwright test --project=pdp --headed",
+    "e2e:pdp-manual": "playwright test --project=pdp --headed --no-deps",
+    "e2e:hotel": "playwright test --project=services-hotel --no-deps",
+    "e2e:hotel-headed": "playwright test --project=services-hotel --no-deps --headed",
+    "e2e:traveler-ui": "playwright test --project=traveler-ui",
+    "e2e:traveler-ui-headed": "playwright test --project=traveler-ui --headed",
+    "e2e:traveler-ui-manual": "playwright test --project=traveler-ui --headed --no-deps",
+    "e2e:headed": "playwright test --project=ui --headed",
+    "e2e:debug-ui": "playwright test --ui",
+    "e2e:report": "playwright show-report"
+  },
+  "devDependencies": {
+    "@azure/identity": "^4.13.2",
+    "@azure/service-bus": "^7.9.5",
+    "@playwright/test": "^1.59.1",
+    "@types/pg": "^8.23.1",
+    "dotenv": "^17.4.2",
+    "mongodb": "^6.11.0",
+    "pg": "^8.23.0"
+  }
+}

@@ -1,8 +1,9 @@
 # tripbuilder-e2e
 
 Playwright end-to-end tests for TripBuilder, run against the deployed portal
-(`https://tripbuilder-portal-gmguhndwguh2fxh6.a03.azurefd.net`). No localhost
-dev servers are needed.
+(`https://tripbuilder.dev.triparcdev.com` by default; set `BASE_URL` in `.env`
+to target another environment, and `API_BASE_URL` if the BFF is not at
+`<origin>/bff/api/`). No localhost dev servers are needed.
 
 This repo has two kinds of tests:
 
@@ -73,7 +74,7 @@ that fails on correct selectors is a finding for the ticket.
 ## Search suite
 
 Playwright suite for the NL search feature, driven entirely against the
-deployed portal (`https://tripbuilder-portal-gmguhndwguh2fxh6.a03.azurefd.net`)
+deployed portal (`BASE_URL`, default `https://tripbuilder.dev.triparcdev.com`)
 — no localhost dev servers required.
 
 ### Structure (POM)

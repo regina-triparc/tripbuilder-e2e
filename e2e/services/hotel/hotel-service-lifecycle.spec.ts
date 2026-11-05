@@ -8,8 +8,9 @@ import { TripItineraryPage } from '../../pages/trip-itinerary.page';
  * Scope, and why it is split this way:
  *
  *   READ  the itinerary lists the hotel service, and the read-only detail sheet
- *         renders the HOTEL branch (`sds-hotel-phone`) rather than the ground /
- *         activity / air one. Non-destructive, runs anywhere.
+ *         renders the HOTEL branch (its "Check-in" schedule row; `sds-hotel-phone`
+ *         is gone, observed 1 Nov 2026) rather than the ground / activity / air
+ *         one. Non-destructive, runs anywhere.
  *   MODIFY availability only. "Modify" hands off to the nested SHOPPING remote in
  *         replace mode, so actually completing a modify is a shopping-picker
  *         test wearing an itinerary hat — see the note at the bottom.
@@ -52,7 +53,11 @@ test.describe('hotel service on the itinerary', () => {
     });
 
     const failures: string[] = [];
-    const hotel = services.find((service) => service.name.toLowerCase().includes(HOTEL_NAME.toLowerCase()));
+    // Card titles are the property name alone ("DoubleTree by Hilton Lyon Eurexpo"); the
+    // "Hotel" label is the card's type (observed 1 Nov 2026), so match either.
+    const hotel = services.find((service) =>
+      `${service.name} ${service.type}`.toLowerCase().includes(HOTEL_NAME.toLowerCase()),
+    );
 
     if (!hotel) {
       failures.push(
@@ -83,12 +88,13 @@ test.describe('hotel service on the itinerary', () => {
     await itinerary.closeServiceDetail();
 
     const failures: string[] = [];
-    // `sds-hotel-phone` exists only in the hotel branch of the sheet template,
-    // so its presence is what distinguishes "the hotel sheet rendered" from
-    // "a sheet rendered". Its VALUE may legitimately be blank.
-    if (fields.hotelPhone === undefined) {
+    // The "Check-in" schedule row exists only in the hotel branch of the sheet
+    // template, so its presence is what distinguishes "the hotel sheet rendered"
+    // from "a sheet rendered". (It replaced `sds-hotel-phone`, which moved to the
+    // Travellers tab — observed 1 Nov 2026.)
+    if (fields.hotelCheckIn === undefined) {
       failures.push(
-        'ui: the detail sheet did not render sds-hotel-phone — either the sheet opened on a ' +
+        'ui: the detail sheet rendered no Check-in row — either the sheet opened on a ' +
           'non-hotel service, or the hotel branch regressed',
       );
     }
